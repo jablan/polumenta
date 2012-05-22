@@ -11,6 +11,7 @@ configure do
       d: %w{o},
       e: %w{b v g d đ ž z j k l lj p s t ć f h č dž š flj klj plj gr vr vl pl fl tr},
       t: ['Polumenta Generator'],
+      p: ['Polumenta'],
     },
     c: {
       a: %w{Б В Г Д Ђ Ж З Ј К Л Љ П С Т Ћ Ф Х Ч Џ Ш Фљ Кљ Пљ Гр Вр Вл Пл Фл Тр},
@@ -19,6 +20,7 @@ configure do
       d: %w{о},
       e: %w{б в г д ђ ж з ј к л љ п с т ћ ф х ч џ ш фљ кљ пљ гр вр вл пл фл тр},
       t: ['Полумента Генератор'],
+      p: ['Полумента'],
     }
   }
 end
@@ -38,51 +40,11 @@ end
   get route do
     @dado = order.map{|r| @s[alphabet][r]}.join
     @title = @s[alphabet][:t]
-    haml "#{alphabet}index".to_sym
+    p = @s[alphabet][:p]
+    haml "#{@dado} #{p}"
   end
 end
 
 get // do
   redirect to('/')
 end
-
-__END__
-
-@@layout
-!!!
-%html
-  %head
-    %style(type="text/css")
-      :sass
-        body
-          text-align: center
-        #p
-          font-size: 300%
-          font-weight: bold
-          margin: 200px
-        #f
-          font-size: 70%
-          p
-            margin: 0
-    %title
-      =@title
-
-  %body
-    #p
-      = yield
-
-    #f
-      %p
-        %a{href: '/'} Радо
-        %a{href: '/olo'} Радодадо
-        %a{href: '/ololo'} Фолотроло
-      %p
-        %a{href: '/l'} Rado
-        %a{href: '/lolo'} Radodado
-        %a{href: '/lololo'} Folotrolo
-
-@@lindex
-="#{@dado} Polumenta"
-
-@@cindex
-="#{@dado} Полумента"
